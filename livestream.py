@@ -9,6 +9,8 @@ def livestream_files():
     directory = os.listdir("videos")
     random.shuffle(directory)
     for video in directory:
+        if not video.endswith('.mp4'):
+            continue
         command = [
             "ffmpeg", "-re", "-i", f"videos/{video}", "-c:v", "libx264",
             "-preset", "veryfast", "-maxrate", "3000k", "-bufsize", "6000k",
@@ -16,7 +18,7 @@ def livestream_files():
             "-ac", "2", "-ar", "44100", "-f", "flv", STREAM_URL,
         ]
         print("Starting livestream for:", video)
-        subprocess.run(command, capture_output=True)
+        subprocess.run(command, capture_output=False)
         try:
             os.remove("None")
         except FileNotFoundError:
