@@ -9,7 +9,7 @@ def livestream_files():
     random.shuffle(directory)
     for video in directory:
         command = (
-            f"ffmpeg -re -i videos/{video} -c:v libx264 -preset veryfast -maxrate 3000k "
+            f"ffmpeg -re -i 'videos/{video}' -c:v libx264 -preset veryfast -maxrate 3000k "
             f"-bufsize 6000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 160k -ac 2 "
             f"-ar 44100 -f flv {STREAM_URL}"
         ).split()
