@@ -9,8 +9,6 @@ def livestream_files():
     directory = os.listdir("videos")
     random.shuffle(directory)
     for video in directory:
-        if not video.endswith('.mp4'):
-            continue
         command = [
             "ffmpeg", "-re", "-i", f"videos/{video}", "-c:v", "libx264",
             "-preset", "veryfast", "-maxrate", "3000k", "-bufsize", "6000k",
